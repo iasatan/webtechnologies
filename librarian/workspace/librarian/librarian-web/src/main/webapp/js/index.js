@@ -1,5 +1,28 @@
 var adCount = 10;
 
+function listAuthors(){
+	$.getJSON('authors', function(data) {
+		var table = $('<table id="authorsTable" border="1"></table>');
+		$(table).append(
+				'<tr><th>ID</th><th>Name</th><th>Nationality</th><th>Birth date</th></tr>');
+
+		$.each(data, function(key, value) {
+			var row = $('<tr></tr>');
+			var link
+			var idCell=$('<td>'+value['authorID']+'</td>');
+			var nameCell = $('<td>' + value['name'] + '</td>');
+			var nationCell = $('<td>' + value['nationality'] + '</td>');
+			var birthDateCell = $('<td>' + converDate(value['birthDate']) + '</td>');
+			$(row).append(idCell);
+			$(row).append(nameCell);
+			$(row).append(nationCell);
+			$(row).append(birthDateCell);
+			$(table).append(row);
+		});
+		$('#help').append(table);
+	});
+}
+
 function goneTooFar() {
 	alert("real");
 }

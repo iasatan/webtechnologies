@@ -2,7 +2,7 @@
 	$.getJSON('authors', function(data) {
 		var table = $('<table id="authorsTable" border="1"></table>');
 		$(table).append(
-				'<tr><th>Name</th><th>Nation</th><th>Birth date</th></tr>');
+				'<tr><th>Name</th><th>Nationality</th><th>Birth date</th></tr>');
 
 		$.each(data, function(key, value) {
 			var row = $('<tr></tr>');

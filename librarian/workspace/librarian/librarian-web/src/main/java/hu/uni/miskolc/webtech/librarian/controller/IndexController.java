@@ -25,14 +25,9 @@ public class IndexController {
 		ModelAndView result = new ModelAndView("bookauthors");
 		return result;
 	}
-	@RequestMapping(value={"/addbooks"})
-	public ModelAndView addbooksPage(){
-		ModelAndView result = new ModelAndView("addbooks");
-		return result;
-	}
-	@RequestMapping(value={"/addauthors"})
-	public ModelAndView addAuthorsPage(){
-		ModelAndView result = new ModelAndView("addauthors");
+	@RequestMapping(value={"/authorform"})
+	public ModelAndView authorFormPage(){
+		ModelAndView result = new ModelAndView("authorform");
 		return result;
 	}
 	@RequestMapping("/hello")

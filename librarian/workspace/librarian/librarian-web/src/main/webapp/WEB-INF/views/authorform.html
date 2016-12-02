@@ -1,0 +1,98 @@
+<html>
+<head>
+<title>Author Form</title>
+</head>
+<form action="" method="post" class="form">
+	<table class="tabla" border="1">
+		<tr>
+			<td>ID:(only for update)</td>
+			<td><input type="number" name="authorID" /></td>
+		</tr>
+		<tr>
+			<td>Name:</td>
+			<td><input type="text" name="name" required="required" autofocus/></td>
+		</tr>
+		<tr>
+			<td>Nationality:</td>
+			<td><select name="nationality" required="required"><option
+						value="Hungarian">Hungarian</option>
+					<option value="British">British</option>
+					<option value="American">American</option>
+					<option value="German">German</option>
+					<option value="China">China</option></select></td>
+		</tr>
+		<tr>
+			<td>Birthdate:</td>
+			<td><input type="date" name="birthDate" required="required"/></td>
+		</tr>
+	</table>
+	<input type="submit" name="insert" value="New Author"/>
+	<input type="submit" name="update" value="Update Author" />
+	<input type="button" value="List Authors" onclick="listAuthors()"/>
+</form>
+<div id="help"></div>
+<script type="text/javascript">
+$.fn.serializeObject = function()
+{
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function() {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+};
+$(document).ready(function() {
+    $("form").submit(function() { 
+        var val = $("input[type=submit][clicked=true]").val();
+        var jsontosend = JSON.stringify($('form').serializeObject());
+        //alert(jsontosend);
+        if (val === 'New Author') {
+        	$.ajax({
+                contentType: 'application/json',
+                data: jsontosend,
+                dataType: 'json',
+                success: function(data){
+                    app.log("device control succeeded");
+                   alert('Author successfully inserted');
+                },
+                error: function(){
+                    app.log("Device control failed");
+                    alert('Author failed to be inserted');
+                },
+                processData: false,
+                type: 'POST',
+                url: 'author/insert'
+            });
+        } else if (val === 'Update Author'){
+        	$.ajax({
+                contentType: 'application/json',
+                data: jsontosend,
+                dataType: 'json',
+                success: function(data){
+                    app.log("device control succeeded");
+                    alert('Author successfully updated');
+                },
+                error: function(){
+                    app.log("Device control failed");
+                    alert('Author failed to update');
+                },
+                processData: false,
+                type: 'POST',
+                url: 'author/update'
+            });
+        }
+    });
+    $("form input[type=submit]").click(function() {
+        $("input[type=submit]", $(this).parents("form")).removeAttr("clicked");
+        $(this).attr("clicked", "true");
+    });
+});
+</script>
+</html>
