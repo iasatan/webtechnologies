@@ -1,0 +1,58 @@
+@CHARSET "UTF-8";
+	a:link{color: white; text-decoration: none;}
+	a:visited{color: white; text-decoration: none;}
+	#everything{
+		margin: auto;
+		width:100%;
+	}
+	#header{}
+	#banner{
+		height: 160px;
+		background: white;
+  	    margin: 0px 50px 0px 50px;
+		text-align: center;
+		color: gray;
+		font-size: 140px;
+	} 
+	#news{
+		width: 100px;
+		background: grey;
+		float: right;
+	}
+	#content{
+		  min-height: 1080px;
+		  /*width: 800px;*/
+		  background: gray;
+		  color: black;
+		  font-size: 20px;
+	}
+	#footer{
+		  font-size:5px;
+		  background: blue;
+		  color: yellow;
+	}
+	#menuBar{
+		  margin-top:60px;
+		  background: white;
+		  float: right;
+		  font-size: 17px;
+	}
+	#menuBar .menuButton{
+		font-family: "atrament-web", "proxima-nova-extra-condensed", Helvetica, Arial, sans-serif;
+			display: inline-block;
+			width: 150px;
+			background: gray;
+			border: 5px solid black;
+			border-radius: 20px ;
+			margin: 15px;
+			padding: auto;
+			text-align: center;
+			color: white;
+			text-decoration: none;
+	}
+	#menuBar .menuButton:HOVER{
+			background: black;
+			border: 5px solid gray;
+			border-radius: 20px ;
+			color: white;
+	}

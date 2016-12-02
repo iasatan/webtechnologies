@@ -1,0 +1,27 @@
+<script>
+$.getJSON('authors', function(data){
+	var table = $('<table border="1"></table>');
+	$(table).append('<tr><th>Name</th><th>Nation</th><th>Birth date</th></tr>');
+	
+	$.each(data, function(key, value){
+		var birthDate=new Date(value['birthDate']);
+		var date;
+		if(value['birthDate']<-9999999999999){
+			date = birthDate.getFullYear() + '-' +birthDate.getMonth() + '-' + (birthDate.getDate()+21);
+			alert(date);
+		}
+		else
+		date = birthDate.getFullYear() + '-' +(birthDate.getMonth() + 1) + '-' + birthDate.getDate();
+		var row =$('<tr></tr>');
+		var nameCell=$('<td>'+value['name']+'</td>');
+		var nationCell=$('<td>'+value['nationality']+'</td>');
+		var birthDateCell=$('<td>'+date+'</td>');
+		$(row).append(nameCell);
+		$(row).append(nationCell);
+		$(row).append(birthDateCell);
+		$(table).append(row);
+		
+	});
+	$('#content').append(table);
+});
+</script>

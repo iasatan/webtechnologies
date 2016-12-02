@@ -1,0 +1,54 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="css/index.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<title>Endless Lorem Ipsum</title>
+
+<script type="text/javascript">
+	var scroll = true;
+	$(document).ready(function() {
+		for (j = 0; j < 10; j++)
+			loremScroll();
+		$.each($('.menuButton'), function(mbIndex, mbValue) {
+			$(mbValue).click(function(event) {
+				event.preventDefault();
+				if(!($(this).find('a').attr('href')=="index")){
+					$('#content').load($(this).find('a').attr('href'));
+					$('#footer').hide();
+					scroll = false;
+				}
+				else
+					open('index',"_self");
+			});
+		});
+
+	});
+</script>
+<script type="text/javascript">
+	
+</script>
+</head>
+<body onscroll="loremScroll()">
+	<div id="everything">
+		<div id="header">
+			<div id="banner">
+				<div id="menuBar">
+					<span class="menuButton"><a href="index">Home</a></span> 
+					<span class="menuButton"><a href="bookauthors">Authors</a></span>
+					<span class="menuButton"><a href="books">Contact</a></span> 
+					<span class="menuButton"><a href="contact">Contact</a></span>
+				</div>
+				Library
+			</div>
+		</div>
+		<div id="content">
+			<h2>Welcome in the library of endless Lorem ipsum</h2>
+			Lorem ipsum dolor sit amet,<img src='images/ad1.png' style='float:right;' onclick="goneTooFar()">
+		</div>
+		<div id=footer>You won't catch me</div>
+	</div>
+</body>
+</html>
+<!-- author lista + felvétel, könyv listázás -->

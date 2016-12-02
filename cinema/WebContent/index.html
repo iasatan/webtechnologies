@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Cinema</title>
+<link rel="stylesheet" href="css/layout.css" />
+<script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+				$("#menuBar li a").each(function() {
+					$(this).click(function(event) {
+						event.preventDefault();
+						//alert($(this).attr('href'));
+						$('#content').load($(this).attr('href'));
+					});
+				});
+				$('#content').load('home.html');
+
+				$.getJSON('news.json', function(data) {
+					$.each(data, function(key, val) {
+						$('#news').append(
+								'<div class="newsItem"><div class="newsItemHeader">'
+										+ val['title']
+										+ '</div><div class="newsItemContent">'
+										+ val['teaser'] + '</div></div>');
+					});
+				});
+			});
+</script>
+</head>
+<body>
+	<div id="header">
+		<div id="bannerLogo"></div>
+		<div id="menuBar">
+			<ul>
+				<li><a href="home.html">Home</a></li>
+				<li><a href="movies.html">Movies</a></li>
+				<li><a href="timeTable.html">Time Table</a></li>
+				<li><a href="contact.html">Contact</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="siteBody">
+		<div id="news"></div>
+		<div id="content"></div>
+
+	</div>
+	<div id="footer">footer</div>
+</body>
+</html>
