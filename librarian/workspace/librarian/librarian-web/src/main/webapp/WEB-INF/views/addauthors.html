@@ -1,0 +1,59 @@
+<form name="authorForm"  action="" onsubmit="validateForm()" method="post"><table border="1" onload="getDate()"> 
+	<tr>
+		<td>
+			ID:
+		</td>
+		<td>
+			<input type="number" name="authorId" min="1">
+		</td>
+	</tr> 
+	<tr>
+		<td>
+			Name:
+		</td>
+		<td>
+			<input type="text" name="name">
+		</td>
+	</tr>
+	<tr>
+		<td>Nationality:</td>
+			<td><select name="nationality" required="required"><option
+						value="Hungarian">Hungarian</option>
+					<option value="British">British</option>
+					<option value="American">American</option>
+					<option value="German">German</option>
+					<option value="China">China</option></select></td>
+	</tr>
+	<tr>
+		<td>
+			Birth date:
+		</td>
+		<td>
+			<input id="birthDateId" type="date" name="birthDate">
+		</td>
+	</tr>
+  </table>
+  <input type="submit" name="add" value="Add Author">
+  <input type="submit" name="update" value="Update Author">
+</form> 
+<script>
+function getDate(){
+	var today=new date();
+	var date=today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDay();
+	alert(date);
+	document.getElementById("birthDateId").value=date;
+	
+}
+function validateForm() {
+    var x = document.forms["authorForm"]["name"].value;
+    if (x == "") {
+        alert("Name must be filled out");
+        return false;
+    }
+    var x = document.forms["authorForm"]["birthDate"].value;
+    if (x == "") {
+        alert("birthDate must be filled out");
+        return false;
+    }
+}
+</script>

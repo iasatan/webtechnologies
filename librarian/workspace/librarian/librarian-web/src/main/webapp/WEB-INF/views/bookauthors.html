@@ -1,27 +1,20 @@
 <script>
-$.getJSON('authors', function(data){
-	var table = $('<table border="1"></table>');
-	$(table).append('<tr><th>Name</th><th>Nation</th><th>Birth date</th></tr>');
-	
-	$.each(data, function(key, value){
-		var birthDate=new Date(value['birthDate']);
-		var date;
-		if(value['birthDate']<-9999999999999){
-			date = birthDate.getFullYear() + '-' +birthDate.getMonth() + '-' + (birthDate.getDate()+21);
-			alert(date);
-		}
-		else
-		date = birthDate.getFullYear() + '-' +(birthDate.getMonth() + 1) + '-' + birthDate.getDate();
-		var row =$('<tr></tr>');
-		var nameCell=$('<td>'+value['name']+'</td>');
-		var nationCell=$('<td>'+value['nationality']+'</td>');
-		var birthDateCell=$('<td>'+date+'</td>');
-		$(row).append(nameCell);
-		$(row).append(nationCell);
-		$(row).append(birthDateCell);
-		$(table).append(row);
-		
+	$.getJSON('authors', function(data) {
+		var table = $('<table id="authorsTable" border="1"></table>');
+		$(table).append(
+				'<tr><th>Name</th><th>Nation</th><th>Birth date</th></tr>');
+
+		$.each(data, function(key, value) {
+			var row = $('<tr></tr>');
+			var link
+			var nameCell = $('<td id="authorId" onclick="openBooks(' + "'" + value['name'] + "'" + ')">' + value['name'] + '</td>');
+			var nationCell = $('<td>' + value['nationality'] + '</td>');
+			var birthDateCell = $('<td>' + converDate(value['birthDate']) + '</td>');
+			$(row).append(nameCell);
+			$(row).append(nationCell);
+			$(row).append(birthDateCell);
+			$(table).append(row);
+		});
+		$('#content').append(table);
 	});
-	$('#content').append(table);
-});
 </script>

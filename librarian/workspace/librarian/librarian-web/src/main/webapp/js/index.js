@@ -3,7 +3,57 @@ var adCount = 10;
 function goneTooFar() {
 	alert("real");
 }
+function openBooks(author)
+{
+	var tbl=document.getElementById("authorsTable");
+	tbl.parentNode.removeChild(tbl);
+	$.getJSON('books', function(data) {
+		var table = $('<table border="1"></table>');
+		$(table).append('<tr><th>Id</th><th>Title</th><th>Genre</th><th>Author</th></tr>');
 
+		$.each(data, function(key, value) {
+			var authorCell=$('<td></td>');
+			var actualAuthor;
+
+			$.each(value['authors'], function(authorIndex, authorValue){
+				$(authorCell).append(authorValue['name']);
+				actualAuthor=authorValue['name'];
+			});
+			if(author===actualAuthor){
+				var row = $('<tr></tr>');
+				var idCell = $('<td>' + value['bookId'] + '</td>');
+				var titleCell = $('<td>' + value['title'] + '</td>');
+				var genresCell = $('<td>' + value['genres']	+ '</td>');
+				$(row).append(idCell);
+				$(row).append(titleCell);
+				$(row).append(genresCell);
+				$(row).append(authorCell);
+				$(table).append(row);
+			}
+		});
+		$('#content').append(table);
+	});
+}
+function converDate(dateToCheck) {
+	var date = new Date(dateToCheck);
+	var turningDate = new Date(1582, 9, 15);
+	if (date.getFullYear() <= 1582) {
+		if (date.getTime() < turningDate.getTime()) {
+			date.setDate(date.getDate() - 10);
+		}
+	}
+	var century = 1500
+	while (date.getFullYear() < century) {
+		if ((century % 400) != 0) {
+			date.setDate(date.getDate() + 1);
+		}
+		century = century - 100;
+
+	}
+	var formatedTime = date.getFullYear() + '-' + (date.getMonth() + 1)
+			+ '-' + date.getDate();
+	return formatedTime;
+}
 function loremScroll() {
 	if (scroll) {
 		var lorem = [ "lorem", "ipsum", "dolor", "sit", "amet,", "consectetur",
@@ -205,7 +255,7 @@ function loremScroll() {
 		var first = lorem[Math.floor((Math.random() * 1186) + 1)];
 		div.innerHTML = div.innerHTML + first.charAt(0).toUpperCase()
 				+ first.slice(1);
-		for (i = 0; i < 120; i++)
+		for (i = 0; i < 140; i++)
 			div.innerHTML = div.innerHTML + " "
 					+ lorem[Math.floor((Math.random() * 1186) + 1)];
 		div.innerHTML = div.innerHTML
